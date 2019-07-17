@@ -19,7 +19,6 @@ export class ProductService {
     private productListSource = new BehaviorSubject<Product[] | null>(null);
     productListChanges$ = this.productListSource.asObservable();
 
-    // currentDocument = this.socket.fromEvent<Product>('product');
     productsList;
 
     constructor(private http: HttpClient, private socket: Socket) { }
@@ -29,9 +28,6 @@ export class ProductService {
     }
 
     getProducts(): Observable<Product[]> {
-        // if (this.products) {
-        //     return of(this.products);
-        // }
         this.socket.emit('products');
         return this.socket.fromEvent<Product[]>('documents');
     }
@@ -42,13 +38,16 @@ export class ProductService {
 
     createProduct(product: Product) {
         this.socket.emit('addDoc', product);
+        return this.socket.fromEvent<Product>('product');
     }
 
     updateProduct(product: Product) {
         this.socket.emit('editDoc', product);
+        return this.socket.fromEvent<Product>('product');
     }
-    deleteProduct(id) {
-        this.socket.emit('deleteDoc', id);
+    deleteProduct(product: Product) {
+        this.socket.emit('deleteDoc', product);
+        return null;
     }
 
     getProducts1(): Observable<Product[]> {
@@ -71,7 +70,8 @@ export class ProductService {
             productCode: 'New',
             description: '',
             starRating: 0,
-            value: 200
+            date: new Date(),
+            value: 200,
         };
     }
 

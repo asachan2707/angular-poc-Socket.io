@@ -17,7 +17,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
     pageTitle = 'Products';
     errorMessage: string;
     displayCode: boolean;
-    // products: Observable<Product[]>;
     products: Product[];
     selectedProduct: Product | null;
     sub = new Subscription();
@@ -25,13 +24,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
     constructor(private productService: ProductService, private ref: ChangeDetectorRef, private socket: Socket) { }
 
     ngOnInit(): void {
-        // this.sub = this.productService.selectedProductChanges$.subscribe(
-        //     (selectedProduct) => {
-        //         this.selectedProduct = selectedProduct;
-        //         this.ref.detectChanges();
-        //     }
-        // );
-
         this.sub.add(this.productService.getProducts().subscribe(
             (products: Product[]) => {
                 this.products = products;
@@ -40,16 +32,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
             },
             (err: any) => this.errorMessage = err.error
         ));
-
-        // this.products = this.productService.getProducts();
-        // this.products = this.productService.productsList;
-        // console.log('list comp: this.products: ', this.products);
-
-        // this.productService.getProducts();
-        // this.socket.on('products', (products) => {
-        //     console.log('[ProductListComponent] PRodcut Revi ', products);
-        // });
-
     }
 
     ngOnDestroy(): void {

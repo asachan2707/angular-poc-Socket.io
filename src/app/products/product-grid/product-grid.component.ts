@@ -11,7 +11,6 @@ import { Subscription, Observable } from 'rxjs';
 })
 export class ProductGridComponent implements OnInit, OnDestroy {
 
-    // products: Observable<Product[]>;
     products: Product[];
     errorMessage: string;
     sub: Subscription;
@@ -19,7 +18,7 @@ export class ProductGridComponent implements OnInit, OnDestroy {
     constructor(private productService: ProductService, private ref: ChangeDetectorRef) { }
 
     ngOnInit() {
-        this.productService.getProducts().subscribe(
+        this.sub = this.productService.getProducts().subscribe(
             (products: Product[]) => {
                 this.products = products;
                 console.log('Grid comp: this.products: ', this.products);
@@ -28,21 +27,9 @@ export class ProductGridComponent implements OnInit, OnDestroy {
             (err: any) => this.errorMessage = err.error
         );
 
-        // this.productService.getProducts();
-        // this.products = this.productService.productsList;
-        // console.log('Grid comp: this.products: ', this.products);
-
-        // this.sub = this.productService.productListChanges$.subscribe(
-        //     (products) => {
-        //         if (!!products) {
-        //             this.products = products;
-        //             this.ref.detectChanges();
-        //         }
-        //     }
-        // );
     }
 
     ngOnDestroy(): void {
-        // this.sub.unsubscribe();
+        this.sub.unsubscribe();
     }
 }

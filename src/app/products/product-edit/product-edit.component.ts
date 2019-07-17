@@ -98,39 +98,39 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     this.displayProduct(this.product);
   }
 
-  // deleteProduct(): void {
-  //   if (this.product && this.product.id) {
-  //     if (confirm(`Really delete the product: ${this.product.productName}?`)) {
-  //       this.productService.deleteProduct(this.product.id).subscribe(
-  //         () => this.productService.changeSelectedProduct(null),
-  //         (err: any) => this.errorMessage = err.error
-  //       );
-  //     }
-  //   } else {
-  //     this.productService.changeSelectedProduct(null);
-  //   }
-  // }
+  deleteProduct(): void {
+    if (this.product) {
+      if (confirm(`Really delete the product: ${this.product.productName}?`)) {
+        this.productService.deleteProduct(this.product).subscribe(
+          () => this.productService.changeSelectedProduct(null),
+          (err: any) => this.errorMessage = err.error
+        );
+      }
+    } else {
+      this.productService.changeSelectedProduct(null);
+    }
+  }
 
-  // saveProduct(): void {
-  //   if (this.productForm.valid) {
-  //     if (this.productForm.dirty) {
-  //       const p = { ...this.product, ...this.productForm.value };
+  saveProduct(): void {
+    if (this.productForm.valid) {
+      if (this.productForm.dirty) {
+        const p = { ...this.product, ...this.productForm.value };
 
-  //       if (p.id === 0) {
-  //         this.productService.createProduct(p).subscribe(
-  //           product => this.productService.changeSelectedProduct(product),
-  //           (err: any) => this.errorMessage = err.error
-  //         );
-  //       } else {
-  //         this.productService.updateProduct(p).subscribe(
-  //           product => this.productService.changeSelectedProduct(product),
-  //           (err: any) => this.errorMessage = err.error
-  //         );
-  //       }
-  //     }
-  //   } else {
-  //     this.errorMessage = 'Please correct the validation errors.';
-  //   }
-  // }
+        if (p.id === 0) {
+          this.productService.createProduct(p).subscribe(
+            product => this.productService.changeSelectedProduct(product),
+            (err: any) => this.errorMessage = err.error
+          );
+        } else {
+          this.productService.updateProduct(p).subscribe(
+            product => this.productService.changeSelectedProduct(product),
+            (err: any) => this.errorMessage = err.error
+          );
+        }
+      }
+    } else {
+      this.errorMessage = 'Please correct the validation errors.';
+    }
+  }
 
 }

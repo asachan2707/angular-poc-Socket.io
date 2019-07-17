@@ -4,9 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { ProductData } from './products/product-data';
-
 import { ROUTING } from './app-routing.module';
 
 import { AppComponent } from './app.component';
@@ -30,7 +27,6 @@ const config: SocketIoConfig = { url: 'http://localhost:4444', options: {} };
   imports: [
     BrowserModule,
     HttpClientModule,
-    // HttpClientInMemoryWebApiModule.forRoot(ProductData),
     ROUTING,
     UserModule,
     SharedModule,

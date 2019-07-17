@@ -17,16 +17,23 @@ io.on('connection', socket => {
         socket.emit('document', documents[docId]);
     });
 
-    socket.on('addDoc', doc => {
-        documents[doc.id] = doc;
-        safeJoin(doc.id);
-        io.emit('documents', Object.keys(documents));
-        socket.emit('document', doc);
+    socket.on('addDoc', product => {
+        products.push(product);
+        io.emit('documents', products);
+        socket.emit('document', product);
     });
 
-    socket.on('editDoc', doc => {
-        documents[doc.id] = doc;
-        socket.to(doc.id).emit('document', doc);
+    socket.on('editDoc', product => {
+        const data = products.filter(item => item.productCode !== product.productCode);
+        products = [];
+        products.push(...data, product);
+        io.emit('documents', products);
+        socket.emit('document', product);
+    });
+
+    socket.on('deleteDoc', product => {
+        products = products.filter(item => item.productCode !== product.productCode);
+        io.emit('documents', products);
     });
 
     socket.on('products', () => {
@@ -42,7 +49,7 @@ http.listen(4444, () => {
     console.log('Listening on port 4444');
 });
 
-const products = [
+let products = [
     {
         id: 1,
         productName: 'Leaf Rake',
