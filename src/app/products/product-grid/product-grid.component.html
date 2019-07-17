@@ -1,0 +1,14 @@
+products: {{products}} 
+
+<div class="card border-dark mb-3 col-md-6" *ngFor="let product of products">
+  <div class="card-header bg-transparent border-dark">{{ product.productCode }}</div>
+  <div class="card-body text-dark">
+    <h5 class="card-title">{{ product.productName }}</h5>
+    <p class="card-text">Description: <span *ngIf="product.description; else noData">{{ product.description }}</span></p>
+    <p class="card-text">Launch Date: {{ product.date | date }}</p>
+    <p class="card-text">Price: {{ product.value | currency: '$' }}</p>
+  </div>
+  <div class="card-footer bg-transparent border-dark">StarRating: {{ product.starRating }}</div>
+</div>
+
+<ng-template #noData>Not available.</ng-template>

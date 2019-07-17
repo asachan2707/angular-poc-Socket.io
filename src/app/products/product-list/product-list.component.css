@@ -1,0 +1,7 @@
+.card-body {
+  padding: 0;
+}
+.list-size {
+  max-height: 175px;
+  overflow: auto;
+}
