@@ -1,0 +1,26 @@
+<p>{{name}} List</p>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th class="col-size-sm">#</th>
+        <th class="col-size-lg">Code</th>
+        <th class="col-size-lg">Name</th>
+        <th>About</th>
+        <th>Price ($)</th>
+        <th>Raiting</th>
+      </tr>
+    </thead>
+      <tbody>
+        <ng-container *ngIf="items.length; else loading">
+          <tr *ngFor="let item of items; let i = index">
+            <td class="col-size-sm">{{i+1}}/{{items.length}}</td>
+            <td class="col-size-lg">{{item.productCode}}</td>
+            <td class="col-size-lg">{{item.productName}}</td>
+            <td>{{item.description}}</td>
+            <td style="text-align: center">{{item.value | number : '1.0-2' }}</td>
+            <td style="text-align: center">{{item.starRating}}</td>
+          </tr>
+          </ng-container>
+      </tbody>
+  </table>
+  <ng-template #loading>No Data.</ng-template>

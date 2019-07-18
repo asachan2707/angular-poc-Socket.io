@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { NgxProductListModule } from 'ngx-product-list';
 
 import { ROUTING } from './app-routing.module';
 
@@ -20,6 +21,7 @@ import { ProductChartComponent } from './products/product-chart/product-chart.co
 import { SharedModule } from './shared/shared.module';
 import { ProductEditComponent } from './products/product-edit/product-edit.component';
 import { ProductTableComponent } from './products/product-table/product-table.component';
+import { ProductLibraryComponent } from './products/product-library/product-library.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:4444', options: {} };
 
@@ -31,7 +33,8 @@ const config: SocketIoConfig = { url: 'http://localhost:4444', options: {} };
     UserModule,
     SharedModule,
     VirtualScrollerModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    NgxProductListModule
   ],
   declarations: [
     AppComponent,
@@ -44,7 +47,8 @@ const config: SocketIoConfig = { url: 'http://localhost:4444', options: {} };
     ProductGridComponent,
     ProductChartComponent,
     PageNotFoundComponent,
-    ProductTableComponent
+    ProductTableComponent,
+    ProductLibraryComponent
   ],
   bootstrap: [AppComponent]
 })

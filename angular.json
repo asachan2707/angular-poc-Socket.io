@@ -118,6 +118,46 @@
           }
         }
       }
+    },
+    "ngx-product-list": {
+      "root": "projects/ngx-product-list",
+      "sourceRoot": "projects/ngx-product-list/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-product-list/tsconfig.lib.json",
+            "project": "projects/ngx-product-list/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/ngx-product-list/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-product-list/src/test.ts",
+            "tsConfig": "projects/ngx-product-list/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-product-list/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-product-list/tsconfig.lib.json",
+              "projects/ngx-product-list/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "angular-poc"

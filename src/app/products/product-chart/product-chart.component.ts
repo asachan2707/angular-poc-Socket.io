@@ -37,24 +37,25 @@ export class ProductChartComponent implements OnInit {
 
     ngOnInit() {
 
-        const productList = this.getProducts();
-        console.log('productList: ', productList);
-        this.initSvg();
-        this.initAxis(productMockData);
-        this.drawAxis();
-        this.drawLine(productMockData);
+        this.getProducts();
     }
 
-    getProducts(): Product[] {
+    getProducts() {
         let productList = [];
         this.productService.getProducts().subscribe(
             (products: Product[]) => {
                 productList = products;
+                console.log('chart comp: this.products: ', productList);
+                console.log('chart comp: productMockData: ', productMockData);
                 this.ref.detectChanges();
+                this.initSvg();
+                this.initAxis(productMockData);
+                this.drawAxis();
+                this.drawLine(productMockData);
             },
             (err: any) => this.errorMessage = err.error
         );
-        return productList;
+        // return productList;
     }
 
     initSvg() {

@@ -11,6 +11,7 @@ import { ProductShellComponent } from './products/product-shell/product-shell.co
 import { ProductGridComponent } from './products/product-grid/product-grid.component';
 import { ProductChartComponent } from './products/product-chart/product-chart.component';
 import { ProductTableComponent } from './products/product-table/product-table.component';
+import { ProductLibraryComponent } from './products/product-library/product-library.component';
 
 const appRoutes: Routes = [
   {
@@ -21,6 +22,7 @@ const appRoutes: Routes = [
       { path: 'products',  component: ProductListComponent },
       { path: 'product-grid', component: ProductGridComponent },
       { path: 'product-table', component: ProductTableComponent },
+      { path: 'library-list', component: ProductLibraryComponent },
       { path: 'product-chart', canActivate: [AuthGuard], component: ProductChartComponent },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
     ]
